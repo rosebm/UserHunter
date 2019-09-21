@@ -4,4 +4,9 @@
     <string name="menu">Menu</string>
     <string name="search">Search</string>
     <string name="add">Add</string>
+    <string name="search_users">Search Users</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="photo_description">User photo</string>
 </resources>
