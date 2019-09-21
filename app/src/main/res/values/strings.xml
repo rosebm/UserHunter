@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">UserHunter</string>
     <string name="dev_name">Rosalyn Blanco</string>
+    <string name="menu">Menu</string>
+    <string name="search">Search</string>
+    <string name="add">Add</string>
 </resources>
