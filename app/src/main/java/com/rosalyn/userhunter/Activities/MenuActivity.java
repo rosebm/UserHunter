@@ -47,5 +47,7 @@ public class MenuActivity extends Activity implements View.OnClickListener{
      * Calls the AddUser activity
      */
     private void callAddScreen(){
+        Intent intent = new Intent(this, AddUserActivity.class);
+        startActivity(intent);
     }
 }

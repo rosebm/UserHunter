@@ -9,13 +9,13 @@ public class UserResponse {
     @SerializedName("avatar")
     private String photo_url;
 
-    @SerializedName("firs_name")
+    @SerializedName("first_name")
     private String first_name;
 
     @SerializedName("last_name")
     private String last_name;
 
-    @SerializedName("last_name")
+    @SerializedName("email")
     private String email;
 
     public UserResponse(String f, String l, String e, String p){//test

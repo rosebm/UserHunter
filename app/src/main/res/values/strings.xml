@@ -9,4 +9,7 @@
     <string name="last_name">Last Name</string>
     <string name="email">Email</string>
     <string name="photo_description">User photo</string>
+    <string name="add_user">New User</string>
+    <string name="name">Name</string>
+    <string name="job">Job</string>
 </resources>

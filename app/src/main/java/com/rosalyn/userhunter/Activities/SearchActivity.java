@@ -4,19 +4,22 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.rosalyn.userhunter.Adapter.UserRecyclerViewAdapter;
+import com.rosalyn.userhunter.Interface.GetData;
 import com.rosalyn.userhunter.Model.UserResponse;
+import com.rosalyn.userhunter.Presenter.UserActivityPresenter;
 import com.rosalyn.userhunter.R;
 import com.rosalyn.userhunter.databinding.ActivitySearchBinding;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SearchActivity extends Activity {
+public class SearchActivity extends Activity implements GetData {
     private ActivitySearchBinding searchBinding;
 
     @Override
@@ -39,7 +42,13 @@ public class SearchActivity extends Activity {
         //dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.separator));
         searchBinding.rvUsersList.addItemDecoration(dividerItemDecoration);
 
-        searchBinding.rvUsersList.setAdapter(new UserRecyclerViewAdapter(this, createDummyList()));
+        UserActivityPresenter userActivityPresenter = new UserActivityPresenter();
+        userActivityPresenter.getUser(new GetData() {
+            @Override
+            public void getData(@NonNull ArrayList<UserResponse> usersList) {
+                searchBinding.rvUsersList.setAdapter(new UserRecyclerViewAdapter(SearchActivity.this, usersList));
+            }
+        });
     }
 
     //test
@@ -54,5 +63,10 @@ public class SearchActivity extends Activity {
         users.add(new UserResponse("Andrea 1", "Dossi", "ad@gmail.com", "https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg"));
 
         return users;
+    }
+
+    @Override
+    public void getData(@NonNull ArrayList<UserResponse> usersList) {
+        searchBinding.rvUsersList.setAdapter(new UserRecyclerViewAdapter(this, usersList));
     }
 }
