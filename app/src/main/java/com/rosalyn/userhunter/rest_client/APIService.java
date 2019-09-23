@@ -1,7 +1,7 @@
 package com.rosalyn.userhunter.rest_client;
 
+import com.rosalyn.userhunter.Model.NewUserResponse;
 import com.rosalyn.userhunter.Model.UResponse;
-import com.rosalyn.userhunter.Model.UserResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,5 +12,5 @@ public interface APIService {
     Call<UResponse> getUsers();
 
     @POST("users")
-    Call<UserResponse> postUser();
+    Call<NewUserResponse> postUser();
 }

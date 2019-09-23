@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.rosalyn.userhunter.Interface.SentData;
+import com.rosalyn.userhunter.Model.NewUserResponse;
 import com.rosalyn.userhunter.Presenter.UserActivityPresenter;
 import com.rosalyn.userhunter.R;
 import com.rosalyn.userhunter.databinding.ActivityAddUserBinding;
@@ -39,8 +41,21 @@ public class AddUserActivity extends Activity {
         });
     }
 
+    /**
+     * Sends the values to the presenter to add a new user
+     * If is inserted successfully, a toast message will be shown
+     * with its unique id
+     *
+     * @param name user name
+     * @param job user job
+     */
     private void addNewUser(String name, String job){
         UserActivityPresenter userActivityPresenter = new UserActivityPresenter();
-
+        userActivityPresenter.AddNewUser(name, job, new SentData() {
+            @Override
+            public void onSuccessful(NewUserResponse newUserResponse) {
+                Toast.makeText(context, "New user id: " + newUserResponse.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

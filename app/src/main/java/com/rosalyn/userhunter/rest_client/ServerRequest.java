@@ -1,6 +1,8 @@
 package com.rosalyn.userhunter.rest_client;
 
 import com.rosalyn.userhunter.Interface.GetData;
+import com.rosalyn.userhunter.Interface.SentData;
+import com.rosalyn.userhunter.Model.NewUserResponse;
 import com.rosalyn.userhunter.Model.UResponse;
 
 import java.util.concurrent.TimeUnit;
@@ -62,10 +64,30 @@ public class ServerRequest {
         });
     }
 
-    public static void addNewUser(){
+    /**
+     * Inserts new user
+     */
+    public static void addNewUser(final SentData callback){
         Retrofit retrofit = getRetrofit();
         APIService apiService = retrofit.create(APIService.class);
-        apiService.postUser();
+        Call<NewUserResponse> call = apiService.postUser();
+
+        call.enqueue(new Callback<NewUserResponse>() {
+            @Override
+            public void onResponse(Call<NewUserResponse> call, Response<NewUserResponse> response) {
+                if (response.isSuccessful()){
+                    NewUserResponse jsonResponse = response.body();
+
+                    if (jsonResponse != null)
+                        callback.onSuccessful(jsonResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewUserResponse> call, Throwable t) {
+
+            }
+        });
     }
 
 }
